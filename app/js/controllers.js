@@ -2,21 +2,21 @@
 
 /* Controllers */
 
-var phonecatControllers = angular.module('phonecatControllers', []);
+var thingsApp = angular.module('thingsApp', []);
 
-phonecatControllers.controller('PhoneListCtrl', ['$scope', 'Phone',
-  function($scope, Phone) {
-    $scope.phones = Phone.query();
-    $scope.orderProp = 'age';
-  }]);
+thingsApp.controller('ThingsAppCtrl', function ($scope) {
+  $scope.things = [
+    {'name': 'The Thing', 
+     'snippet' : 'it\'s a thing that does things :O',
+     'age' : 2},
+    {'name' : 'Other Thing',
+     'snippet' : 'Hey a thing that also does things',
+     'age' : 5},
+    {'name' : 'Last Thing',
+     'snippet' : 'This is the last thing. It\'s not as good as the other things',
+     'age' : 1},
+  ];
+  $scope.name = "Thing Looker";
+  $scope.orderProp = 'age'
+});
 
-phonecatControllers.controller('PhoneDetailCtrl', ['$scope', '$routeParams', 'Phone',
-  function($scope, $routeParams, Phone) {
-    $scope.phone = Phone.get({phoneId: $routeParams.phoneId}, function(phone) {
-      $scope.mainImageUrl = phone.images[0];
-    });
-
-    $scope.setImage = function(imageUrl) {
-      $scope.mainImageUrl = imageUrl;
-    }
-  }]);
