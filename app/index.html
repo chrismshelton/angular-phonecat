@@ -1,15 +1,40 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="thingsApp" ng-controller="ThingsAppCtrl">
 <head>
   <meta charset="utf-8">
-  <title>My HTML File</title>
+  <title>These are things</title>
   <link rel="stylesheet" href="css/app.css">
   <link rel="stylesheet" href="css/bootstrap.css">
   <script src="lib/angular/angular.js"></script>
+  <script src="js/controllers.js"></script>
 </head>
-<body>
-
-  <p>Nothing here {{'yet' + '!'}}</p>
+  <div class="container-fluid">
+    <div class="row-fluid">
+      <div class="span2">
+      <!--Sidebar content-->
+        Search: <input ng-model="query">
+	Sort By:
+	<select ng-model="orderProp">
+	  <option value="name">Alphabetical</option>
+	  <option value="age">Newest</option>
+	  <option value="-age">Oldest</option>
+	</select>
+      </div>
+      <div class="span10">
+      <!--Body Content-->
+            <h2>Hello {{name}}, look at all the things</h2>
+	    <table>
+            <tr ng-repeat="thing in things | filter:query | orderBy:orderProp">
+	    <td>{{thing.age}} years old</td>
+            <td><strong>{{thing.name}}</strong><td>
+            <td>{{thing.snippet}}</td>
+            </tr>
+          </table>
+        <br>
+      </div>
+      <p>There are {{(things|filter:query).length}} things to look at.</p>
+    </div>
+  </div>
 
 </body>
 </html>
